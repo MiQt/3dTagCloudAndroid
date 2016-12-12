@@ -22,6 +22,7 @@ import java.util.List;
 public class TextTagsAdapter extends TagsAdapter {
 
     private List<String> dataSet = new ArrayList<>();
+    private ViewGroup.LayoutParams parm = new ViewGroup.LayoutParams(9, 9);
 
     public TextTagsAdapter(@NonNull String... data) {
         dataSet.clear();
@@ -35,18 +36,10 @@ public class TextTagsAdapter extends TagsAdapter {
 
     @Override
     public View getView(final Context context, final int position, ViewGroup parent) {
-        TextView tv = new TextView(context);
-        tv.setText("No." + position);
-        tv.setGravity(Gravity.CENTER);
-        tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e("Click", "Tag " + position + " clicked.");
-                Toast.makeText(context, "Tag " + position + " clicked", Toast.LENGTH_SHORT).show();
-            }
-        });
-        tv.setTextColor(Color.WHITE);
-        return tv;
+        View view = new View(context);
+        view.setLayoutParams(parm);
+        view.setBackgroundResource(R.mipmap.ic_launcher);
+        return view;
     }
 
     @Override

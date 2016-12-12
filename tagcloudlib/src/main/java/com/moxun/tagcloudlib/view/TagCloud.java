@@ -2,17 +2,17 @@ package com.moxun.tagcloudlib.view;
 
 /**
  * Copyright © 2016 moxun
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the “Software”),
  * to deal in the Software without restriction, including without limitation the
  * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
  * sell copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -176,8 +176,10 @@ public class TagCloud {
         //distribute: (disrtEven is used to specify whether distribute random or even
         for (int i = 1; i < max + 1; i++) {
             if (distrEven) {
-                phi = Math.acos(-1.0 + (2.0 * i - 1.0) / max);
-                theta = Math.sqrt(max * Math.PI) * phi;
+//                phi = Math.acos(-1.0 + (2.0 * i - 1.0) / max);
+//                theta = Math.sqrt(max * Math.PI) * phi;
+                phi = Math.PI / 2;
+                theta = i * Math.PI * 2.0f / max;
             } else {
                 phi = Math.random() * (Math.PI);
                 theta = Math.random() * (2 * Math.PI);
@@ -266,6 +268,10 @@ public class TagCloud {
 
     public void setAngleY(float mAngleY) {
         this.mAngleY = mAngleY;
+    }
+
+    public void setAngleZ(float mAngleZ) {
+        this.mAngleZ = mAngleZ;
     }
 
     public void sortTagByScale() {

@@ -175,13 +175,16 @@ public class TagCloudView extends ViewGroup implements Runnable, TagsAdapter
         }
     }
 
-    public void setRotation(float x, float y, float z) {
+    public void setRotation(float x, float y, float z, boolean apply) {
         if (mTagCloud != null) {
             mTagCloud.setAngleX(x);
             mTagCloud.setAngleY(y);
+            mTagCloud.setAngleZ(z);
             mTagCloud.update();
         }
-        resetChildren();
+        if (apply) {
+            resetChildren();
+        }
     }
 
     private void initFromAdapter() {
@@ -324,43 +327,6 @@ public class TagCloudView extends ViewGroup implements Runnable, TagsAdapter
 
         resetChildren();
         return true;
-    }
-
-    @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
-        handleTouchEvent(ev);
-        return false;
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent e) {
-        handleTouchEvent(e);
-        return true;
-    }
-
-    private float downX, downY;
-
-    private void handleTouchEvent(MotionEvent e) {
-        switch (e.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                downX = e.getX();
-                downY = e.getY();
-                isOnTouch = true;
-            case MotionEvent.ACTION_MOVE:
-                //rotate elements depending on how far the selection point is from center of cloud
-                float dx = e.getX() - downX;
-                float dy = e.getY() - downY;
-                if (isValidMove(dx, dy)) {
-                    mAngleX = (dy / radius) * speed * TOUCH_SCALE_FACTOR;
-                    mAngleY = (-dx / radius) * speed * TOUCH_SCALE_FACTOR;
-                    processTouch();
-                }
-                break;
-            case MotionEvent.ACTION_UP:
-            case MotionEvent.ACTION_CANCEL:
-                isOnTouch = false;
-                break;
-        }
     }
 
     private boolean isValidMove(float dx, float dy) {

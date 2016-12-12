@@ -18,8 +18,6 @@ public class MainActivity extends AppCompatActivity {
 
     private TagCloudView tagCloudView;
     private TextTagsAdapter textTagsAdapter;
-    private ViewTagsAdapter viewTagsAdapter;
-    private VectorTagsAdapter vectorTagsAdapter;
     private SensorManager manager;
     private Sensor sensor;
 
@@ -31,9 +29,7 @@ public class MainActivity extends AppCompatActivity {
         tagCloudView = (TagCloudView) findViewById(R.id.tag_cloud);
         tagCloudView.setBackgroundColor(Color.LTGRAY);
         tagCloudView.setAutoScrollMode(TagCloudView.MODE_DISABLE);
-        textTagsAdapter = new TextTagsAdapter(new String[20]);
-        viewTagsAdapter = new ViewTagsAdapter();
-        vectorTagsAdapter = new VectorTagsAdapter();
+        textTagsAdapter = new TextTagsAdapter(new String[130]);
 
         tagCloudView.setAdapter(textTagsAdapter);
 
@@ -41,45 +37,34 @@ public class MainActivity extends AppCompatActivity {
         sensor = manager.getDefaultSensor(Sensor.TYPE_ORIENTATION, true);
 
 
-        findViewById(R.id.tag_text).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tagCloudView.setRotation(10, 0, 0);
-            }
-        });
-
-        findViewById(R.id.tag_view).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tagCloudView.setAdapter(viewTagsAdapter);
-            }
-        });
-
-        findViewById(R.id.tag_vector).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tagCloudView.setAdapter(vectorTagsAdapter);
-            }
-        });
-
-        findViewById(R.id.test_fragment).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, FragmentTestActivity.class));
-            }
-        });
     }
 
     float lastx;
     float lasty;
     float lastz;
+
+    float currx;
+    float curry;
+    float currz;
     SensorEventListener mSensorEventListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {
+
             float x = event.values[0];
             float y = event.values[1];
             float z = event.values[2];
-            tagCloudView.setRotation(y - lasty, x - lastx, 0);
+            tagCloudView.setRotation(90 - curry, 0, 0,
+                    false);
+            tagCloudView.setRotation(0, x - lastx, 0,
+                    true);
+            tagCloudView.setRotation(curry - 90, 0, 0,
+                    false);
+
+            tagCloudView.setRotation(y - lasty, 0, 0,
+                    true);
+            curry += y - lasty;
+            currz += z - lastz;
+            currx += x - lastx;
             lastx = x;
             lasty = y;
             lastz = z;
