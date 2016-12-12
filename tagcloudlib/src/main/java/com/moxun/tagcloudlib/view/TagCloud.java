@@ -176,13 +176,11 @@ public class TagCloud {
         //distribute: (disrtEven is used to specify whether distribute random or even
         for (int i = 0; i < max; i++) {
             if (distrEven) {
-//                phi = Math.acos(-1.0 + (2.0 * i - 1.0) / max);
-//                theta = Math.sqrt(max * Math.PI) * phi;
                 if (i < 15) {
                     phi = Math.PI / 7 * 1;
                     theta = i * Math.PI * 2.0f / 15;
                 } else if (i < 15 + 20) {
-                    phi = Math.PI / 7* 2;
+                    phi = Math.PI / 7 * 2;
                     theta = i * Math.PI * 2.0f / 20;
                 } else if (i < 15 + 20 + 30) {
                     phi = Math.PI / 7 * 3;

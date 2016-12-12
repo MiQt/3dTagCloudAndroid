@@ -38,7 +38,11 @@ public class TextTagsAdapter extends TagsAdapter {
     public View getView(final Context context, final int position, ViewGroup parent) {
         View view = new View(context);
         view.setLayoutParams(parm);
-        view.setBackgroundResource(R.mipmap.ic_launcher);
+        if (position == 8) {
+            view.setBackgroundColor(Color.RED);
+        } else {
+            view.setBackgroundResource(R.color.tagDark);
+        }
         return view;
     }
 
@@ -49,11 +53,11 @@ public class TextTagsAdapter extends TagsAdapter {
 
     @Override
     public int getPopularity(int position) {
-        return position % 7;
+        return 0;
     }
 
     @Override
     public void onThemeColorChanged(View view, int themeColor) {
-        view.setBackgroundColor(themeColor);
+        //view.setBackgroundColor(themeColor);
     }
 }
