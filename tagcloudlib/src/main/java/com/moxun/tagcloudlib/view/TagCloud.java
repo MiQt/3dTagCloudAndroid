@@ -174,22 +174,40 @@ public class TagCloud {
         double theta = 0;
         int max = tagCloud.size();
         //distribute: (disrtEven is used to specify whether distribute random or even
-        for (int i = 1; i < max + 1; i++) {
+        for (int i = 0; i < max; i++) {
             if (distrEven) {
 //                phi = Math.acos(-1.0 + (2.0 * i - 1.0) / max);
 //                theta = Math.sqrt(max * Math.PI) * phi;
-                phi = Math.PI / 2;
-                theta = i * Math.PI * 2.0f / max;
+                if (i < 15) {
+                    phi = Math.PI / 7 * 1;
+                    theta = i * Math.PI * 2.0f / 15;
+                } else if (i < 15 + 20) {
+                    phi = Math.PI / 7* 2;
+                    theta = i * Math.PI * 2.0f / 20;
+                } else if (i < 15 + 20 + 30) {
+                    phi = Math.PI / 7 * 3;
+                    theta = i * Math.PI * 2.0f / 30;
+                } else if (i < 15 + 20 + 30 + 30) {
+                    phi = Math.PI / 7 * 4;
+                    theta = i * Math.PI * 2.0f / 30;
+                } else if (i < 15 + 20 + 30 + 30 + 20) {
+                    phi = Math.PI / 7 * 5;
+                    theta = i * Math.PI * 2.0f / 20;
+                } else if (i < 15 + 20 + 30 + 30 + 20 + 15) {
+                    phi = Math.PI / 7 * 6;
+                    theta = i * Math.PI * 2.0f / 15;
+                }
+
             } else {
                 phi = Math.random() * (Math.PI);
                 theta = Math.random() * (2 * Math.PI);
             }
 
             //coordinate conversion:
-            tagCloud.get(i - 1).setLocX((int) ((radius * Math.cos(theta) * Math.sin(phi))
+            tagCloud.get(i).setLocX((int) ((radius * Math.cos(theta) * Math.sin(phi))
             ));
-            tagCloud.get(i - 1).setLocY((int) (radius * Math.sin(theta) * Math.sin(phi)));
-            tagCloud.get(i - 1).setLocZ((int) (radius * Math.cos(phi)));
+            tagCloud.get(i).setLocY((int) (radius * Math.sin(theta) * Math.sin(phi)));
+            tagCloud.get(i).setLocZ((int) (radius * Math.cos(phi)));
         }
     }
 

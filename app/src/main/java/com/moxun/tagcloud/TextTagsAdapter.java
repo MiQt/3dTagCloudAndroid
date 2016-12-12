@@ -22,7 +22,7 @@ import java.util.List;
 public class TextTagsAdapter extends TagsAdapter {
 
     private List<String> dataSet = new ArrayList<>();
-    private ViewGroup.LayoutParams parm = new ViewGroup.LayoutParams(9, 9);
+    private ViewGroup.LayoutParams parm = new ViewGroup.LayoutParams(18, 18);
 
     public TextTagsAdapter(@NonNull String... data) {
         dataSet.clear();
