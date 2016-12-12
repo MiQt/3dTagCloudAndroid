@@ -43,7 +43,8 @@ import com.moxun.tagcloudlib.R;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-public class TagCloudView extends ViewGroup implements Runnable, TagsAdapter.OnDataSetChangeListener {
+public class TagCloudView extends ViewGroup implements Runnable, TagsAdapter
+        .OnDataSetChangeListener {
     private static final float TOUCH_SCALE_FACTOR = .8f;
     private static final float TRACKBALL_SCALE_FACTOR = 10;
     private float speed = 2f;
@@ -174,6 +175,15 @@ public class TagCloudView extends ViewGroup implements Runnable, TagsAdapter.OnD
         }
     }
 
+    public void setRotation(float x, float y, float z) {
+        if (mTagCloud != null) {
+            mTagCloud.setAngleX(x);
+            mTagCloud.setAngleY(y);
+            mTagCloud.update();
+        }
+        resetChildren();
+    }
+
     private void initFromAdapter() {
         this.postDelayed(new Runnable() {
             @Override
@@ -224,7 +234,8 @@ public class TagCloudView extends ViewGroup implements Runnable, TagsAdapter.OnD
                         onTagClickListener.onItemClick(TagCloudView.this, v, position);
                     }
                 });
-                Log.e("TagCloudView", "Build version is less than 15, the OnClickListener may be overwritten.");
+                Log.e("TagCloudView", "Build version is less than 15, the OnClickListener may be " +
+                        "overwritten.");
             }
         }
     }
@@ -254,8 +265,10 @@ public class TagCloudView extends ViewGroup implements Runnable, TagsAdapter.OnD
             layoutParams = (MarginLayoutParams) getLayoutParams();
         }
 
-        int dimensionX = widthMode == MeasureSpec.EXACTLY ? contentWidth : minSize - layoutParams.leftMargin - layoutParams.rightMargin;
-        int dimensionY = heightMode == MeasureSpec.EXACTLY ? contentHeight : minSize - layoutParams.leftMargin - layoutParams.rightMargin;
+        int dimensionX = widthMode == MeasureSpec.EXACTLY ? contentWidth : minSize - layoutParams
+                .leftMargin - layoutParams.rightMargin;
+        int dimensionY = heightMode == MeasureSpec.EXACTLY ? contentHeight : minSize -
+                layoutParams.leftMargin - layoutParams.rightMargin;
         setMeasuredDimension(dimensionX, dimensionY);
 
         measureChildren(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
@@ -286,7 +299,8 @@ public class TagCloudView extends ViewGroup implements Runnable, TagsAdapter.OnD
                 left = (int) (centerX + tag.getLoc2DX()) - child.getMeasuredWidth() / 2;
                 top = (int) (centerY + tag.getLoc2DY()) - child.getMeasuredHeight() / 2;
 
-                child.layout(left, top, left + child.getMeasuredWidth(), top + child.getMeasuredHeight());
+                child.layout(left, top, left + child.getMeasuredWidth(), top + child
+                        .getMeasuredHeight());
             }
         }
     }
