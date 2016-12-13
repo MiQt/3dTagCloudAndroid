@@ -35,13 +35,24 @@ public class TextTagsAdapter extends TagsAdapter {
     }
 
     @Override
-    public View getView(final Context context, final int position, ViewGroup parent) {
-        View view = new View(context);
+    public View getView(final Context context, final int i, ViewGroup parent) {
+        TextView view = new TextView(context);
         view.setLayoutParams(parm);
-        if (position == 8) {
+        view.setText(i + "");
+        view.setTextColor(Color.parseColor("#FFFFFF"));
+        view.setTextSize(5);
+        if (i < 15) {
             view.setBackgroundColor(Color.RED);
-        } else {
-            view.setBackgroundResource(R.color.tagDark);
+        } else if (i < 15 + 20) {
+            view.setBackgroundColor(Color.LTGRAY);
+        } else if (i < 15 + 20 + 30) {
+            view.setBackgroundColor(Color.GRAY);
+        } else if (i < 15 + 20 + 30 + 30) {
+            view.setBackgroundColor(Color.GREEN);
+        } else if (i < 15 + 20 + 30 + 30 + 20) {
+            view.setBackgroundColor(Color.BLUE);
+        } else if (i < 15 + 20 + 30 + 30 + 20 + 15) {
+            view.setBackgroundColor(Color.YELLOW);
         }
         return view;
     }

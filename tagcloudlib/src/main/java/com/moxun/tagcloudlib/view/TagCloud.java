@@ -291,7 +291,8 @@ public class TagCloud {
     }
 
     public void sortTagByScale() {
-        Collections.sort(tagCloud, new TagComparator());
+        //尚且不大明白作者这样排序的原因，只知道把它去掉就会根据postathion排序
+        // Collections.sort(tagCloud, new TagComparator());
     }
 
     private static class TagComparator implements Comparator<Tag> {
