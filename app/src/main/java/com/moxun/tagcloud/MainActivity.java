@@ -14,6 +14,8 @@ import android.view.View;
 
 import com.moxun.tagcloudlib.view.TagCloudView;
 
+import java.sql.Time;
+
 public class MainActivity extends AppCompatActivity {
 
     private TagCloudView tagCloudView;
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         tagCloudView.setAdapter(textTagsAdapter);
 
         manager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        sensor = manager.getDefaultSensor(Sensor.TYPE_ORIENTATION, true);
+        sensor = manager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
 
 
     }
@@ -49,7 +51,9 @@ public class MainActivity extends AppCompatActivity {
     SensorEventListener mSensorEventListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {
-
+            if (System.currentTimeMillis() - lasttime < 500) {
+                return;
+            }
             float x = event.values[0];
             float y = event.values[1];
             float z = event.values[2];
@@ -75,11 +79,13 @@ public class MainActivity extends AppCompatActivity {
 
         }
     };
+    long lasttime;
 
     @Override
     protected void onResume() {
         super.onResume();
         manager.registerListener(mSensorEventListener, sensor, SensorManager.SENSOR_DELAY_UI);
+        lasttime = System.currentTimeMillis();
     }
 
     @Override
