@@ -52,6 +52,12 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onSensorChanged(SensorEvent event) {
             if (System.currentTimeMillis() - lasttime < 500) {
+                curry = 0;
+                currz = 0;
+                currx = 0;
+                lastx = 0;
+                lasty = 0;
+                lastz = 0;
                 return;
             }
             float x = event.values[0];
